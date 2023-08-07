@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="show.css">
+    <link rel="stylesheet" href="footer.css">
+    <style>
+        .table{
+            border-collapse: collapse;
+            border: 1px;
+        }
+        td,th{
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border: 0.6px solid black;
+
+        }
+        tr:nth-child(odd){
+            background-color: rgb(209, 209, 209);
+            
+        }
+        tr:last-child{
+            background-color: bisque;
+        }
+        h1{
+            text-align: center;
+        }
+        .details{
+            display: grid;
+            grid-template-columns: 40% 60%;
+            column-gap: 50px;
+        }
+        .details img{
+            width: 40%;
+            border-radius: 25px;
+        }
+        .details-explaination{
+            display: grid;
+            grid-template-columns: 40% 80%;
+        }
+        .cartt button{
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            float: right;
+            margin-left: 25px;
+        }
+        span p{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+    <script>
+        function ShowDetails(Name, Length, Breadth, Height, Weight,url) {
+          ele = document.getElementById("detail");
+          ele.innerHTML = "<h2>" + Name + "</h2><p>Length : " + Length + "</p><p>Breadth : " + Breadth + "</p><p>Height : " + Height + "</p><p>Weight :" + Weight + "</p>";
+          ele1 = document.getElementById('img');
+          ele1.innerHTML = "<img src=" +url+ ">";
+        }
+        function del(id){
+            const row=id.parentNode;
+            const table=row.parentNode;
+            table.removeChild(row);
+            let sno = 1;
+            let totalPrice = 0;
+            for (let i = 1; i < table.rows.length-1; i++) {
+                const tds = table.rows[i].cells;
+                const price = parseInt(tds[2].textContent);
+                tds[0].textContent = sno++;
+                totalPrice += price;
+            }
+            table.rows[table.rows.length - 1].cells[2].textContent = totalPrice;
+            document.getElementById("detail").innerHTML="";
+            document.getElementById('img').innerHTML="";
+        }
+        function thanku(){
+            document.getElementById('c').innerHTML="<p>Cart is empty</p>";
+            alert("Order Placed Successfully");
+            document.getElementById("detail").innerHTML="";
+            document.getElementById('img').innerHTML="";
+        }
+      </script>
+
+      
+</head>
+<header>
+    <img src="logo.webp" alt="logo" width="250px" style="margin-left: 25px;">
+    <div class="search">
+        <button><img class="search-img" src="search.svg"></button>
+        <input type="search" style="height: 40px; font-size: 18px;width: 500px;" placeholder="Search items">
+    </div>
+    <div class="login"><a href="home.html">Logout</a></div>
+</header>
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about1.html">About</a></li>
+        <li><a href="gallery1.html">Gallery</a></li>
+        <li><a href="order.html">Shopping</a></li>
+        <li style="background-color: aqua;"><a href="cart.html">Cart</a></li>
+        <li><a href="miniatures1.html">Miniatures</a></li>
+        <li><a href="microarts1.html">Micro Arts</a></li>
+    </ul>
+</nav>
+<body>
+    <div class="details">
+        <div class="cartt">
+            <h1>Your Cart</h1>
+            <table id="c">
+                <tr><th>S.no</th><th>Product Name</th><th>Price</th></tr>
+                <tr><td>1</td><td onmouseover="ShowDetails('Buddha','14 cm','14 cm','22.5 cm','100 grams','1.jpg')">Buddha</td><td>1499</td><td onclick="del(this)" style="text-decoration: underline;width: 50px;">remove</td></tr>
+                <tr><td>2</td><td onmouseover="ShowDetails('Tortoise','8.5 cm','6 cm','8 cm','100 grams','2.jpg')">Tortoise</td><td>249</td><td onclick="del(this)"  style="text-decoration: underline;width: 50px;">remove</td></tr>
+                <tr><td>3</td><td onmouseover="ShowDetails('NeckLase','30 cm','22 cm','-','150 grams','3.jpg')">NeckLase 2</td><td>499</td><td onclick="del(this)" style="text-decoration: underline;width: 50px;">remove</td></tr>
+                <tr><td>4</td><td onmouseover="ShowDetails('Kid Ganesh','8 cm','10 cm','16 cm','200 grams','4.jpg')">Kid Ganesh</td><td>449</td><td onclick="del(this)" style="text-decoration: underline;width: 50px;">remove</td></tr>
+                <tr><td>5</td><td onmouseover="ShowDetails('Farmer','7 cm','7 cm','15.5cm','100 grams','5.jpg')">Farmer</td><td>349</td><td onclick="del(this)" style="text-decoration: underline;width: 50px;">remove</td></tr>
+                <tr><td>-</td><td>Total Price</td><td>3045</td></tr>
+            </table>
+            <button onclick="thanku()">Buy Now</button>
+        </div>
+        <div class="details-explaination">
+            <span id="detail"></span>
+            <span id="img"></span></div>
+        </div>
+    </div>
+    
+</body>
+
+<footer style="position: fixed;width: 100%;bottom: 0;">
+    <p>Contact Information:</p>
+        <ul class="contact-details">
+            <li>Etikoppaka (Village)</li>
+            <li>Yellamanchili (Mandal)</li>
+            <li>Vishakhapatnam (District)</li>
+            <li>Andhra Pradesh (State)</li>
+            <li>Pin code: 531082</li>
+            <li>Mobile Number: 9959512198</li>
+            <li>Email: schinnayachari@gmail.com</li>
+        </ul>
+</footer>
+</html>
